@@ -7,7 +7,8 @@ public class Util {
     public  static <T> Map<T, Integer> countOfElement(T[] array) {
         Map<T, Integer> result = new HashMap<>();
         for (T t : array) {
-            result.put(t, result.getOrDefault(t, 0) + 1);
+            result.merge(t, 1, (prev, one) -> prev + 1);
+ //           result.put(t, result.getOrDefault(t, 0) + 1);
         }
         return result;
     }
