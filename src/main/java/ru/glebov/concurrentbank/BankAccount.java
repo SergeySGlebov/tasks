@@ -2,11 +2,11 @@ package ru.glebov.concurrentbank;
 
 public class BankAccount {
     private int id;
-    private int amount;
+    private int balance;
 
-    public BankAccount(int id, int amount) {
+    public BankAccount(int id, int balance) {
         this.id = id;
-        this.amount = amount;
+        this.balance = balance;
     }
 
     public int getId() {
@@ -17,11 +17,19 @@ public class BankAccount {
         this.id = id;
     }
 
-    public int getAmount() {
-        return amount;
+    public int getBalance() {
+        return balance;
     }
 
-    public void setAmount(int amount) {
-        this.amount = amount;
+    public void deposit(int value) {
+        this.balance += value;
+    }
+
+    public void withdraw(int value) {
+        int balanceAfterChange = this.balance - value;
+        if(balanceAfterChange <= 0) {
+            throw new OutOfBalance("На счете недостаточно средств");
+        }
+        this.balance = balanceAfterChange;
     }
 }

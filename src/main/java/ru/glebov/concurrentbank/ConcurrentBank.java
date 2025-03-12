@@ -14,6 +14,9 @@ public class ConcurrentBank {
     }
 
     public void transfer(BankAccount account1, BankAccount account2, int amount) {
+        if(amount < 0) {
+            throw new IllegalArgumentException("Сумма операции не может быть отрицательной");
+        }
         BankAccount first = account1;
         BankAccount second = account2;
         if (account1.getId() > account2.getId()) {
@@ -22,14 +25,14 @@ public class ConcurrentBank {
         }
         synchronized (first) {
             synchronized (second) {
-                account1.setAmount(account1.getAmount() - amount);
-                account2.setAmount(account2.getAmount() + amount);
+                account1.withdraw(amount);
+                account2.deposit(amount);
             }
         }
     }
 
 
     public synchronized int getTotalBalance() {
-        return accounts.stream().map(BankAccount::getAmount).reduce(Integer::sum).orElse(0);
+        return accounts.stream().map(BankAccount::getBalance).reduce(Integer::sum).orElse(0);
     }
 }
