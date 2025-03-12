@@ -14,7 +14,7 @@ public class ConcurrentBank {
     }
 
     public void transfer(BankAccount account1, BankAccount account2, int amount) {
-        if(amount < 0) {
+        if (amount < 0) {
             throw new IllegalArgumentException("Сумма операции не может быть отрицательной");
         }
         BankAccount first = account1;

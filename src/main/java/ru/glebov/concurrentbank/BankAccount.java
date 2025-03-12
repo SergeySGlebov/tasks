@@ -27,7 +27,7 @@ public class BankAccount {
 
     public void withdraw(int value) {
         int balanceAfterChange = this.balance - value;
-        if(balanceAfterChange <= 0) {
+        if (balanceAfterChange < 0) {
             throw new OutOfBalance("На счете недостаточно средств");
         }
         this.balance = balanceAfterChange;
