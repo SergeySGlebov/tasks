@@ -1,14 +1,17 @@
 package ru.glebov.complextaskexecutor;
 
+import java.util.List;
 import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.Callable;
 import java.util.concurrent.CyclicBarrier;
 
 public class ComplexTask implements Callable<Integer> {
     private final CyclicBarrier barrier;
+    private final List<Integer> resultsOfTasks;
 
-    public ComplexTask(CyclicBarrier barrier) {
+    public ComplexTask(CyclicBarrier barrier, List<Integer> resultsOfTasks) {
         this.barrier = barrier;
+        this.resultsOfTasks = resultsOfTasks;
     }
 
     //count to a million
@@ -19,9 +22,8 @@ public class ComplexTask implements Callable<Integer> {
             for (int i = 0; i < 1_000_000; i++) {
                 result++;
             }
-            System.out.println("before barier " + result);
+            resultsOfTasks.add(result);
             barrier.await();
-            System.out.println("after barier " + result);
             return result;
         } catch (BrokenBarrierException | InterruptedException e) {
             throw new RuntimeException(e);
