@@ -46,5 +46,7 @@ public class GeometryApp {
         System.out.println("Volume: " + sphere.getVolume());
         System.out.println("Surface Area: " + sphere.getSurfaceArea());
 
+        cube.sayHello();
+
     }
 }
