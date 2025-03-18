@@ -27,4 +27,8 @@ public class Triangle extends Shape {
     public double getPerimeter() {
         return sideA + sideB + sideC;
     }
+
+    public void sayHello() {
+        System.out.println("Hello");
+    }
 }
