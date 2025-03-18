@@ -31,5 +31,6 @@ public class GeometryApp {
         System.out.println("\nСравнение фигур:");
         System.out.println("Равны ли площади круга и прямоугольника? " + ShapeComparator.isAreaEqual(circle, rectangle));
         System.out.println("У треугольника и прямоугольника периметр одинаковый? " + ShapeComparator.isPerimeterEqual(triangle, rectangle));
+        ShapeComparator.sayHello();
     }
 }
