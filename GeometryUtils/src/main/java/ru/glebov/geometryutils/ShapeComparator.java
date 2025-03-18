@@ -11,4 +11,7 @@ public class ShapeComparator {
     public static boolean isPerimeterEqual(Shape first, Shape second) {
         return first.getPerimeter() == second.getPerimeter();
     }
+    public static void sayHello() {
+        System.out.println("Hello");
+    }
 }
