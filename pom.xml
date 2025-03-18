@@ -4,11 +4,13 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>ru.glebov.geometrylibrary</groupId>
-    <artifactId>GeometryLibrary</artifactId>
+    <artifactId>Geometry</artifactId>
     <version>1.1.0</version>
     <packaging>pom</packaging>
     <modules>
         <module>ThreeDimensionalShapes</module>
+        <module>GeometryUtils</module>
+        <module>GeometryLibrary</module>
     </modules>
 
     <properties>
