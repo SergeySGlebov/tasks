@@ -3,6 +3,8 @@ package ru.glebov.geometryapp;
 import ru.glebov.geometrylibrary.Circle;
 import ru.glebov.geometrylibrary.Rectangle;
 import ru.glebov.geometrylibrary.Triangle;
+import ru.glebov.geometryutils.ShapeComparator;
+import ru.glebov.geometryutils.UnitConverter;
 
 public class GeometryApp {
     public static void main(String[] args) {
@@ -22,5 +24,12 @@ public class GeometryApp {
         System.out.println("Area: " + triangle.getArea());
         System.out.println("Perimeter: " + triangle.getPerimeter());
         triangle.sayHello();
+
+        System.out.println("\nПеревод единиц:");
+        System.out.println("5 метров в сантиметрах: " + UnitConverter.metersToCentimeters(5));
+
+        System.out.println("\nСравнение фигур:");
+        System.out.println("Равны ли площади круга и прямоугольника? " + ShapeComparator.isAreaEqual(circle, rectangle));
+        System.out.println("У треугольника и прямоугольника периметр одинаковый? " + ShapeComparator.isPerimeterEqual(triangle, rectangle));
     }
 }
