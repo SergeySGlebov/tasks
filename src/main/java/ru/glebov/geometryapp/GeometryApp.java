@@ -21,5 +21,6 @@ public class GeometryApp {
         System.out.println("\nTriangle:");
         System.out.println("Area: " + triangle.getArea());
         System.out.println("Perimeter: " + triangle.getPerimeter());
+        triangle.sayHello();
     }
 }
