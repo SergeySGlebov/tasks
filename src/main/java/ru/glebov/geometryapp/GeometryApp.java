@@ -3,6 +3,8 @@ package ru.glebov.geometryapp;
 import ru.glebov.geometrylibrary.Circle;
 import ru.glebov.geometrylibrary.Rectangle;
 import ru.glebov.geometrylibrary.Triangle;
+import ru.glebov.geometrylibrary.threedimensionalshapes.Cube;
+import ru.glebov.geometrylibrary.threedimensionalshapes.Sphere;
 import ru.glebov.geometryutils.ShapeComparator;
 import ru.glebov.geometryutils.UnitConverter;
 
@@ -32,5 +34,17 @@ public class GeometryApp {
         System.out.println("Равны ли площади круга и прямоугольника? " + ShapeComparator.isAreaEqual(circle, rectangle));
         System.out.println("У треугольника и прямоугольника периметр одинаковый? " + ShapeComparator.isPerimeterEqual(triangle, rectangle));
         ShapeComparator.sayHello();
+
+        Cube cube = new Cube(3);
+        Sphere sphere = new Sphere(4);
+
+        System.out.println("\nCube:");
+        System.out.println("Volume: " + cube.getVolume());
+        System.out.println("Surface Area: " + cube.getSurfaceArea());
+
+        System.out.println("\nSphere:");
+        System.out.println("Volume: " + sphere.getVolume());
+        System.out.println("Surface Area: " + sphere.getSurfaceArea());
+
     }
 }
