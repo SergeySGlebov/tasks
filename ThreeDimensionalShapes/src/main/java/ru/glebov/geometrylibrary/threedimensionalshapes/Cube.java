@@ -19,4 +19,8 @@ public class Cube extends DimensionalShapes{
     public double getSurfaceArea() {
         return 6 * Math.pow(side, 2);
     }
+
+    public void sayHello() {
+        System.out.println("Hello");
+    }
 }
