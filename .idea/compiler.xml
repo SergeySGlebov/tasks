@@ -8,7 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="GeometryLibrary" />
         <module name="localdatetime" />
-        <module name="GeometryApp" />
+        <module name="ThreeDimensionalShapes" />
         <module name="GeometryUtils" />
       </profile>
     </annotationProcessing>
