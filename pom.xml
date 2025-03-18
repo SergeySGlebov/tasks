@@ -13,7 +13,6 @@
     </properties>
 
     <dependencies>
-        <!-- Подключаем GeometryLibrary -->
         <dependency>
             <groupId>ru.glebov.geometrylibrary</groupId>
             <artifactId>GeometryLibrary</artifactId>
