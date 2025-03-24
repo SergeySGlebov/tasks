@@ -1,13 +1,13 @@
-package ru.glebov.jsonview;
+package ru.glebov.pageable;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class JsonViewApplication {
+public class PageableApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(JsonViewApplication.class, args);
+        SpringApplication.run(PageableApplication.class, args);
     }
 
 }

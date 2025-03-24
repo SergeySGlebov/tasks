@@ -1,17 +1,17 @@
-package ru.glebov.jsonview.repository;
+package ru.glebov.pageable.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
-import ru.glebov.jsonview.model.User;
+import ru.glebov.pageable.model.Book;
 
-public interface UserRepository extends JpaRepository<User, Integer> {
+public interface BookRepository extends JpaRepository<Book, Integer> {
 
     @Transactional
     @Modifying
-    @Query("DELETE FROM User u WHERE u.id=:id")
+    @Query("DELETE FROM Book b WHERE b.id=:id")
     int delete(@Param("id") int id);
 
 }
