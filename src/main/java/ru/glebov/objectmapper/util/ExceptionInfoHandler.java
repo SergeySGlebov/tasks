@@ -1,4 +1,4 @@
-package ru.glebov.pageable.util;
+package ru.glebov.objectmapper.util;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

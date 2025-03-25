@@ -1,13 +1,13 @@
-package ru.glebov.pageable;
+package ru.glebov.objectmapper;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class PageableApplication {
+public class ObjectMapperApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(PageableApplication.class, args);
+        SpringApplication.run(ObjectMapperApplication.class, args);
     }
 
 }

@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>ru.glebov</groupId>
-    <artifactId>pageable</artifactId>
+    <artifactId>objectmapper</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>pageable</name>
-    <description>Task with pageable</description>
+    <name>objectmapper</name>
+    <description>Task with objectmapper</description>
     <url/>
     <licenses>
         <license/>
