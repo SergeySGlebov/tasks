@@ -1,9 +1,8 @@
 package ru.glebov.pageable.controller;
 
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.glebov.pageable.model.Author;
@@ -31,12 +30,7 @@ public class BookController {
     }
 
     @GetMapping
-    public ResponseEntity<Page<Book>> getAll(
-            @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "10") int size,
-            @RequestParam(defaultValue = "title,asc") String[] sort) {
-
-        Pageable pageable = PageRequest.of(page, size, getSort(sort));
+    public ResponseEntity<Page<Book>> getAll(@PageableDefault(size = 5, sort = "title,asc") Pageable pageable) {
         Page<Book> books = bookRepository.findAll(pageable);
         return ResponseEntity.ok(books);
     }
@@ -84,15 +78,6 @@ public class BookController {
         } else {
             return ResponseEntity.notFound().build();
         }
-    }
-
-    private Sort getSort(String[] sort) {
-        if (sort.length >= 2) {
-            return Sort.by(new Sort.Order(
-                    Sort.Direction.fromString(sort[1]),
-                    sort[0]));
-        }
-        return Sort.by(sort[0]);
     }
 
 }
