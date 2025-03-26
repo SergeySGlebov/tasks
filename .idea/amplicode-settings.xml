@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CrudOperationsStateConfig">
+    <option name="configPaths">
+      <map>
+        <entry key="dto" value="ru.glebov.spring_data_projections.model.Department" />
+        <entry key="repository" value="ru.glebov.spring_data_projections.repository.DepartmentRepository" />
+        <entry key="serviceProxy" value="ru.glebov.spring_data_projections.service.DepartmentService" />
+      </map>
+    </option>
+  </component>
+  <component name="SpringProjectLocalState">
+    <option name="firstOpen" value="false" />
+  </component>
+</project>
