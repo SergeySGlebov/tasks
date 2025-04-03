@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: oauth2
+  thymeleaf:
+    enabled: true
+    cache: false
+    prefix: classpath:/templates/
+    suffix: .html
+    mode: HTML
+  security:
+    oauth2:
+      client:
+        registration:
+          github:
+            clientId: Ov23liRjL5hZJu5atOMc
+            clientSecret: 7e097f15281f98dcdd5cd9647f770555f848fba1
+            scope: user,user:email
+            redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
+logging:
+  level:
+    ru.glebov.oauth2: DEBUG
+    org.springframework.security: INFO
+    org.thymeleaf: WARN
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"

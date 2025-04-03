@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Профиль пользователя</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .profile { max-width: 600px; margin: 0 auto; }
+        .attribute { margin-bottom: 10px; }
+        .label { font-weight: bold; display: inline-block; width: 100px; }
+    </style>
+</head>
+<body>
+<div class="profile">
+    <h1>Профиль пользователя</h1>
+
+    <div class="attribute">
+        <span class="label">Имя:</span>
+        <span th:text="${name}"></span>
+    </div>
+
+    <div class="attribute">
+        <span class="label">Логин:</span>
+        <span th:text="${login}"></span>
+    </div>
+
+    <div class="attribute">
+        <span class="label">ID:</span>
+        <span th:text="${id}"></span>
+    </div>
+
+    <div class="attribute">
+        <span class="label">Email:</span>
+        <span th:text="${email}"></span>
+    </div>
+</div>
+</body>
+</html>
