@@ -1,0 +1,106 @@
+version: '3.8'
+
+services:
+  zookeeper:
+    image: confluentinc/cp-zookeeper:7.3.0
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+    healthcheck:
+      test: [ "CMD", "zkServer.sh", "status" ]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  kafka:
+    image: confluentinc/cp-kafka:7.3.0
+    depends_on:
+      - zookeeper
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+      KAFKA_DEFAULT_REPLICATION_FACTOR: 1
+      KAFKA_NUM_PARTITIONS: 3
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: "false"
+    healthcheck:
+      test: [ "CMD", "kafka-topics", "--bootstrap-server", "kafka:9092", "--list" ]
+      interval: 10s
+      timeout: 10s
+      retries: 10
+    ports:
+      - "9092:9092"
+
+  kafka-setup:
+    image: confluentinc/cp-kafka:7.3.0
+    depends_on:
+      kafka:
+        condition: service_healthy
+    entrypoint: [ '/bin/sh', '-c' ]
+    command: |
+      "
+      while ! kafka-topics --bootstrap-server kafka:9092 --list; do
+        echo 'Waiting for Kafka...'
+        sleep 1
+      done
+      
+      kafka-topics --bootstrap-server kafka:9092 --create --topic new_orders --partitions 3 --replication-factor 1
+      kafka-topics --bootstrap-server kafka:9092 --create --topic payed_orders --partitions 3 --replication-factor 1
+      kafka-topics --bootstrap-server kafka:9092 --create --topic sent_orders --partitions 3 --replication-factor 1
+      echo 'Topics created'
+      tail -f /dev/null
+      "
+
+  order_microservice:
+    build:
+      context: ./order_microservice
+      dockerfile: Dockerfile
+    ports: ["8080:8080"]
+    environment:
+      KAFKA_BOOTSTRAP_SERVERS: "kafka:9092"
+      SERVER_PORT: 8080
+      SPRING_KAFKA_CONSUMER_GROUP_ID: "order-group"
+    depends_on:
+      kafka-setup:
+        condition: service_started
+
+  payment_microservice:
+    build:
+      context: ./payment_microservice
+      dockerfile: Dockerfile
+    ports: ["8081:8081"]
+    environment:
+      KAFKA_BOOTSTRAP_SERVERS: "kafka:9092"
+      SERVER_PORT: 8081
+      SPRING_KAFKA_CONSUMER_GROUP_ID: "payment-group"
+    depends_on:
+      kafka-setup:
+        condition: service_started
+
+  shipping_microservice:
+    build:
+      context: ./shipping_microservice
+      dockerfile: Dockerfile
+    ports: ["8082:8082"]
+    environment:
+      KAFKA_BOOTSTRAP_SERVERS: "kafka:9092"
+      SERVER_PORT: 8082
+      SPRING_KAFKA_CONSUMER_GROUP_ID: "shipping-group"
+    depends_on:
+      kafka-setup:
+        condition: service_started
+
+  notification_microservice:
+    build:
+      context: ./notification_microservice
+      dockerfile: Dockerfile
+    ports: ["8083:8083"]
+    environment:
+      KAFKA_BOOTSTRAP_SERVERS: "kafka:9092"
+      SERVER_PORT: 8083
+      SPRING_KAFKA_CONSUMER_GROUP_ID: "notification-group"
+    depends_on:
+      kafka-setup:
+        condition: service_started
